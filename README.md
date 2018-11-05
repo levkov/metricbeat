@@ -46,7 +46,7 @@ input {
 
 output {
 if [metricset][module] == "system" {
-# Replace "system" with any module name.
+# Replace "system" with any other module name.
 
     coralogix_logger { 
         config_params => {
@@ -58,7 +58,7 @@ if [metricset][module] == "system" {
         timestamp_key_name => "YOUR_TIMESTAMP_FIELD"
 
         log_key_name => "system"
-        # Replace "system" with any module name.
+        # Replace "system" with any other module name.
 
         is_json => true
     }
@@ -105,10 +105,6 @@ The first key (config_params) is mandatory while the other two are optional.
       }
 }
 ```
-Because your Metricbeat events are converted to JSON object, in the case you don’t want to send the entire JSON, rather just a portion of it, you can write the value of the key you want to send in the log_key_name.
-
-For instance, in the above example, if you write log_key_name "x_edge_location" then only the value of "x_edge_location" key will be sent to Coralogix. If you do want to send the entire message then you can just delete this key.
-
 Restart Logstash.  
 
 Open your Metricbeat configuration file. (More information about Metricbeat:  https://www.elastic.co/guide/en/beats/metricbeat/master/index.html)
