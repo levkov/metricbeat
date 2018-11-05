@@ -46,6 +46,7 @@ input {
 
 output {
 if [metricset][module] == "system" {
+# Replace "system" with any module name.
 
     coralogix_logger { 
         config_params => {
@@ -57,7 +58,8 @@ if [metricset][module] == "system" {
         timestamp_key_name => "YOUR_TIMESTAMP_FIELD"
 
         log_key_name => "system"
-        
+        # Replace "system" with any module name.
+
         is_json => true
     }
   }
@@ -75,14 +77,32 @@ The first key (config_params) is mandatory while the other two are optional.
 {
     "@timestamp": "2017 - 04 - 03 T18: 44: 28.591 Z",
     "@version": "1",
-    "message": {
-    }
-   "x_edge_location": "LHR50"
-   "cs_method": "GET",
-   "x_edge_result_type": "Error",
-   "cs_protocol_version": "HTTP/1.1",
-   "cloudfront_version": "1.0",
-   ...
+   "process": {
+      "fd": {
+        "limit": {
+          "hard": 1048576,
+          "soft": 1048576
+        },
+        "open": 22
+      },
+      "cpu": {
+        "start_time": "2018-10-28T05:34:15.000Z",
+        "total": {
+          "norm": {
+            "pct": 0
+          },
+          "pct": 0,
+          "value": 310
+        }
+      },
+      "ppid": 1,
+      "pgid": 539,
+      "cwd": "/var/cache/bind",
+      "pid": 539,
+      "cmdline": "/usr/sbin/named -f -u bind",
+      "state": "sleeping",
+      "name": "named"
+      }
 }
 ```
 Because your Metricbeat events are converted to JSON object, in the case you don’t want to send the entire JSON, rather just a portion of it, you can write the value of the key you want to send in the log_key_name.
@@ -97,3 +117,5 @@ Open your Metricbeat configuration file. (More information about Metricbeat:  ht
 output.logstash:
   hosts: ["localhost:5044"]
 ```
+
+Restart Metricbeat. 
