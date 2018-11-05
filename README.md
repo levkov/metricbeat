@@ -89,4 +89,11 @@ Because your Metricbeat events are converted to JSON object, in the case you don
 
 For instance, in the above example, if you write log_key_name "x_edge_location" then only the value of "x_edge_location" key will be sent to Coralogix. If you do want to send the entire message then you can just delete this key.
 
-Restart Logstash.
+Restart Logstash.  
+
+Open your Metricbeat configuration file. (More information about Metricbeat:  https://www.elastic.co/guide/en/beats/metricbeat/master/index.html)
+
+```yaml
+output.logstash:
+  hosts: ["localhost:5044"]
+```
